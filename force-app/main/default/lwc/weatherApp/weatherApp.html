@@ -1,0 +1,54 @@
+<template>
+   <div class="app flex-center">
+    <div class="app-card">
+        <header class="flex-center">
+            <template if:true={response}>
+            <img src={arrowBackIcon} alt="back arrow" onclick={backHandler} class="slds-m-right_margin cursor" />
+        </template>
+            <h1>Weather App</h1>
+        </header>
+        <template if:true={loadingText}>
+            <div class={loadingClasses}>{loadingText}</div>
+        </template>
+        <template if:false={response}>
+        <section class="slds-m-around_large">
+            <form onsubmit={submitHandler}>
+                <input type="text" placeholder="Enter City Name" onkeyup={searchHandler} required spellcheck="false"/>
+            <button type="submit" class="slds-m-top_large">Search</button>
+            </form>
+        </section>
+    </template>
+    <template if:true={response}>
+        <section class="slds-m-around_large text-center">
+        <img src={weatherIcon} alt="Weather Icon" class="weatherimg">
+        <div class="temperature">
+            <span>{response.temperature}</span>
+            <span>°C</span>
+        </div>
+        <div class="description">{response.description}</div>
+        <div class="location">
+            <img src={mapIcon} alt="Location Icon">
+            <span>{response.location}</span>
+        </div>
+        </section>
+   
+        <footer>
+            <div class="feels_like">
+                <div class="align-icon">
+                    <img src={thermometerIcon} alt="Feels_Like Icon">
+                    <p>feels like</p>                  
+                </div>
+                <div>{response.feels_like}°C</div>
+            </div>
+            <div class="humidity">
+                <div  class="align-icon">
+                    <img src={dropletIcon} alt="humidity Icon">
+                    <p>Humidity</p>                  
+                </div>
+                <div>{response.humidity}</div>
+            </div>
+        </footer>
+    </template>
+    </div>
+   </div>
+</template>
